@@ -1,0 +1,6 @@
+{
+  "name": "SoLAcc IT Club",
+  "description": "Official hub for South Louisiana Community College IT Club to showcase student projects, discover upcoming events and workshops, connect with members and alumni, and explore tech networking opportunities in Acadiana.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
