@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SoLAcc IT Club -- South Louisiana Community College</title>
+<meta name="description" content="The official hub for the South Louisiana Community College Information Technology Club: projects, workshops, certifications, and the Acadiana tech community.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ==================================================================
+   SoLAcc IT Club -- shared stylesheet
+   Used by: index.html, projects.html, events.html (and future pages)
+   ================================================================== */
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root{
+  /* base surfaces */
+  --bg: #16222e;
+  --bg-deep: #101923;
+  --bg-elevated: #1a2c3d;
+  --grid-1: #142338;
+  --grid-2: #16273f;
+  --card-bg: rgba(24, 40, 55, 0.55);
+  --card-bg-solid: #1c2f40;
+  --border: rgba(148, 178, 197, 0.14);
+  --border-strong: rgba(148, 178, 197, 0.26);
+
+  /* brand accents */
+  --emerald: #25a77b;
+  --emerald-bright: #2fc794;
+  --cyan: #047fa9;
+  --cyan-bright: #0ba3d9;
+  --emerald-glow: rgba(37, 167, 123, 0.18);
+  --cyan-glow: rgba(4, 127, 169, 0.20);
+  --amber: #d9a441; /* reserved: warnings / capacity-low only */
+  --danger: #d9564a;
+
+  /* text */
+  --text-primary: #eaf1f4;
+  --text-secondary: #9fb4c4;
+  --text-muted: #64798c;
+  --text-on-accent: #071019;
+
+  /* radii */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+
+  /* type */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* layout */
+  --container: 1240px;
+  --nav-h: 68px;
+  --ticker-h: 38px;
+
+  --ease: cubic-bezier(.22,.9,.32,1);
+}
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*,*::before,*::after{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin:0;
+  background:
+    linear-gradient(180deg, rgba(4,127,169,0.05), transparent 320px),
+    repeating-linear-gradient(0deg, var(--grid-1) 0px, var(--grid-1) 1px, transparent 1px, transparent 48px),
+    repeating-linear-gradient(90deg, var(--grid-1) 0px, var(--grid-1) 1px, transparent 1px, transparent 48px),
+    var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+h1,h2,h3,h4{
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+p{ margin:0; }
+a{ color: inherit; text-decoration: none; }
+ul{ margin:0; padding:0; list-style:none; }
+button{ font-family: inherit; cursor:pointer; }
+img{ max-width:100%; display:block; }
+.container{ max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+
+:focus-visible{
+  outline: 2px solid var(--emerald-bright);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection{ background: var(--emerald); color: var(--text-on-accent); }
+
+.eyebrow{
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--emerald-bright);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.eyebrow::before{
+  content:"";
+  width: 6px; height: 6px;
+  background: var(--emerald-bright);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--emerald-bright);
+}
+
+.section{ padding: 96px 0; border-top: 1px solid var(--grid-2); position: relative; }
+.section-head{ max-width: 640px; margin-bottom: 44px; display:flex; flex-direction:column; }
+.section-head.row{ flex-direction:row; align-items:flex-end; justify-content:space-between; max-width:none; gap:24px; flex-wrap:wrap; }
+.section-title{ font-size: clamp(28px, 3.4vw, 40px); margin-top: 10px; }
+.section-desc{ color: var(--text-secondary); margin-top: 12px; font-size: 15.5px; }
+
+/* page header banner (for sub-pages like Projects / Events) */
+.page-banner{ padding: 56px 0 40px; border-bottom: 1px solid var(--grid-2); }
+.page-banner .section-title{ margin-top:10px; }
+.page-banner .section-desc{ max-width: 640px; }
+.breadcrumb{
+  font-family: var(--font-mono); font-size:12.5px; color: var(--text-muted);
+  display:flex; align-items:center; gap:8px; margin-bottom: 18px;
+}
+.breadcrumb a{ color: var(--text-secondary); }
+.breadcrumb a:hover{ color: var(--emerald-bright); }
+
+.glass{
+  background: var(--card-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+}
+
+/* buttons */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font-family: var(--font-body); font-weight:600; font-size:14.5px;
+  padding: 12px 22px; border-radius: var(--r-md);
+  border: 1px solid transparent;
+  transition: transform .15s var(--ease), box-shadow .15s var(--ease), border-color .15s var(--ease), background .15s var(--ease);
+  white-space: nowrap;
+}
+.btn:active{ transform: translateY(1px); }
+.btn-primary{
+  background: linear-gradient(135deg, var(--emerald), var(--cyan));
+  color: #08131a;
+}
+.btn-primary:hover{ box-shadow: 0 0 0 1px var(--emerald-bright), 0 8px 24px -8px var(--emerald-glow); }
+.btn-secondary{
+  background: transparent; color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+.btn-secondary:hover{ border-color: var(--cyan-bright); color: #fff; }
+.btn-ghost{
+  background: rgba(255,255,255,0.03); color: var(--text-secondary);
+  border-color: var(--border);
+  font-size: 13px; padding: 9px 16px;
+}
+.btn-ghost:hover{ color: var(--text-primary); border-color: var(--border-strong); }
+.btn-sm{ padding: 8px 14px; font-size: 13px; }
+.btn-block{ width:100%; }
+.btn[disabled]{ opacity:.45; cursor:not-allowed; }
+.btn-icon{ padding:8px; width:36px; height:36px; }
+
+/* pill / tag */
+.pill{
+  font-family: var(--font-mono); font-size: 12px;
+  padding: 5px 11px; border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.02);
+}
+
+/* ============================================================
+   EMBLEM (shared SVG symbol)
+   ============================================================ */
+.emblem{ width: 40px; height: 40px; flex-shrink:0; }
+.emblem-lg{ width: 84px; height: 84px; }
+
+/* ============================================================
+   TICKER
+   ============================================================ */
+.ticker{
+  height: var(--ticker-h);
+  background: var(--bg-deep);
+  border-bottom: 1px solid var(--grid-2);
+  display:flex; align-items:center;
+  overflow:hidden;
+  position: relative;
+}
+.ticker::before{
+  content:"LIVE";
+  font-family: var(--font-mono); font-size: 11px; font-weight:600;
+  letter-spacing: .08em;
+  color: var(--text-on-accent);
+  background: var(--emerald-bright);
+  padding: 3px 10px;
+  margin-left: 16px;
+  border-radius: 4px;
+  flex-shrink:0;
+  z-index:2;
+  box-shadow: 0 0 12px var(--emerald-glow);
+}
+.ticker-track{
+  display:flex; align-items:center; gap:56px;
+  white-space:nowrap;
+  padding-left: 32px;
+  animation: ticker-scroll 32s linear infinite;
+  font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary);
+}
+.ticker:hover .ticker-track{ animation-play-state: paused; }
+.ticker-track span b{ color: var(--cyan-bright); font-weight:600; }
+@keyframes ticker-scroll{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce){
+  .ticker-track{ animation: none; overflow-x:auto; }
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+.navbar{
+  height: var(--nav-h);
+  position: sticky; top:0; z-index: 90;
+  background: rgba(16,25,35,0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--grid-2);
+}
+.nav-inner{
+  height:100%; display:flex; align-items:center; justify-content:space-between; gap: 20px;
+}
+.nav-brand{ display:flex; align-items:center; gap:12px; }
+.brand-text{ display:flex; flex-direction:column; line-height:1.2; }
+.brand-title{ font-family: var(--font-display); font-weight:700; font-size:15.5px; letter-spacing:-.01em; }
+.brand-sub{ font-family: var(--font-mono); font-size:11px; color: var(--text-muted); letter-spacing:.03em; }
+.campus-badge{
+  font-family: var(--font-mono); font-size:11px;
+  color: var(--emerald-bright);
+  border: 1px solid rgba(37,167,123,0.35);
+  background: rgba(37,167,123,0.08);
+  padding: 3px 9px; border-radius:6px;
+  margin-left: 4px;
+  display:none;
+}
+.nav-links{ display:flex; align-items:center; gap: 30px; }
+.nav-links a{
+  font-size: 14px; font-weight:500; color: var(--text-secondary);
+  position:relative; padding: 4px 0;
+  transition: color .15s var(--ease);
+}
+.nav-links a:hover, .nav-links a.active{ color: var(--text-primary); }
+.nav-links a::after{
+  content:""; position:absolute; left:0; bottom:-4px; height:2px; width:0;
+  background: linear-gradient(90deg,var(--emerald),var(--cyan));
+  transition: width .2s var(--ease);
+}
+.nav-links a:hover::after, .nav-links a.active::after{ width:100%; }
+.nav-right{ display:flex; align-items:center; gap:14px; }
+.mobile-toggle{
+  display:none; background:none; border:1px solid var(--border-strong); border-radius: var(--r-sm);
+  width:40px; height:40px; align-items:center; justify-content:center;
+}
+.mobile-toggle span, .mobile-toggle span::before, .mobile-toggle span::after{
+  content:""; display:block; width:18px; height:2px; background: var(--text-primary);
+  position:relative; transition: transform .2s var(--ease), opacity .2s var(--ease);
+}
+.mobile-toggle span::before{ position:absolute; top:-6px; }
+.mobile-toggle span::after{ position:absolute; top:6px; }
+.mobile-toggle[aria-expanded="true"] span{ background: transparent; }
+.mobile-toggle[aria-expanded="true"] span::before{ transform: translateY(6px) rotate(45deg); }
+.mobile-toggle[aria-expanded="true"] span::after{ transform: translateY(-6px) rotate(-45deg); }
+
+.mobile-drawer{
+  position: fixed; inset: var(--nav-h) 0 0 auto;
+  width: min(86vw, 360px);
+  background: var(--bg-elevated);
+  border-left: 1px solid var(--grid-2);
+  transform: translateX(100%);
+  transition: transform .3s var(--ease);
+  z-index: 95;
+  padding: 28px 24px;
+  display:flex; flex-direction:column; gap: 22px;
+  overflow-y:auto;
+}
+.mobile-drawer.open{ transform: translateX(0); }
+.mobile-drawer a{ font-size:16px; font-weight:500; color: var(--text-primary); }
+.mobile-drawer a.active{ color: var(--emerald-bright); }
+.drawer-scrim{
+  position: fixed; inset: var(--nav-h) 0 0 0; background: rgba(4,8,12,0.55);
+  z-index: 92; opacity:0; pointer-events:none; transition: opacity .3s var(--ease);
+}
+.drawer-scrim.open{ opacity:1; pointer-events:auto; }
+
+@media (max-width: 880px){
+  .nav-links{ display:none; }
+  .mobile-toggle{ display:flex; }
+}
+@media (min-width: 620px){
+  .campus-badge{ display:inline-block; }
+}
+
+/* ============================================================
+   HERO (homepage)
+   ============================================================ */
+.hero{ padding: 76px 0 90px; overflow:hidden; position:relative; }
+.hero-grid{
+  display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items:center;
+}
+.hero-title{ font-size: clamp(34px, 5vw, 54px); margin-top:16px; }
+.hero-title .accent{
+  background: linear-gradient(120deg, var(--emerald-bright), var(--cyan-bright));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.hero-sub{ margin-top:20px; font-size:16.5px; color: var(--text-secondary); max-width: 520px; }
+.hero-actions{ margin-top:32px; display:flex; gap:14px; flex-wrap:wrap; }
+
+/* terminal signature element */
+.terminal{
+  border-radius: var(--r-lg);
+  background: linear-gradient(180deg, #0e1620, #0b1119);
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6), 0 0 0 1px rgba(4,127,169,0.06);
+  overflow:hidden;
+  position: relative;
+}
+.terminal::after{
+  content:"";
+  position:absolute; inset:0;
+  background: repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 3px);
+  pointer-events:none;
+}
+.terminal-head{
+  display:flex; align-items:center; gap:8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(148,178,197,0.1);
+  font-family: var(--font-mono); font-size:12px; color: var(--text-muted);
+}
+.term-dot{ width:9px; height:9px; border-radius:50%; }
+.term-dot.r{ background:#d9564a; } .term-dot.y{ background:#d9a441; } .term-dot.g{ background:#25a77b; }
+.terminal-path{ margin-left:8px; }
+.terminal-body{
+  font-family: var(--font-mono); font-size: 13px; line-height:1.75;
+  padding: 18px 20px 22px; min-height: 260px;
+}
+.term-line{ display:block; opacity:0; transform: translateY(2px); animation: term-in .35s var(--ease) forwards; white-space:pre-wrap; word-break: break-word; }
+.term-line .prompt{ color: var(--cyan-bright); }
+.term-line .ok{ color: var(--emerald-bright); }
+.term-line .dim{ color: var(--text-muted); }
+.term-cursor{ display:inline-block; width:7px; height:14px; background: var(--emerald-bright); vertical-align:-2px; animation: blink 1s step-end infinite; }
+@keyframes term-in{ to{ opacity:1; transform:none; } }
+@keyframes blink{ 50%{ opacity:0; } }
+
+.stats-bar{
+  margin-top: 64px;
+  display:grid; grid-template-columns: repeat(4,1fr);
+  border: 1px solid var(--border); border-radius: var(--r-lg);
+  overflow:hidden;
+}
+.stat-card{
+  padding: 24px 20px; text-align:left;
+  background: var(--card-bg);
+  border-right: 1px solid var(--border);
+}
+.stat-card:last-child{ border-right:none; }
+.stat-value{
+  font-family: var(--font-display); font-size: clamp(24px,3vw,32px); font-weight:700;
+  background: linear-gradient(120deg, var(--emerald-bright), var(--cyan-bright));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.stat-label{ margin-top:6px; font-size:12.5px; color: var(--text-secondary); font-family: var(--font-mono); letter-spacing:.02em; }
+
+@media (max-width: 900px){
+  .hero-grid{ grid-template-columns:1fr; }
+  .stats-bar{ grid-template-columns: repeat(2,1fr); }
+  .stat-card:nth-child(2){ border-right:none; }
+  .stat-card{ border-bottom: 1px solid var(--border); }
+}
+
+/* ============================================================
+   FILTER BAR (Projects + Events)
+   ============================================================ */
+.filter-bar{
+  display:flex; flex-wrap:wrap; gap:10px;
+  margin-bottom: 36px;
+}
+.filter-pill{
+  font-family: var(--font-mono); font-size: 13px;
+  padding: 9px 16px; border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: rgba(255,255,255,0.02);
+  color: var(--text-secondary);
+  display:inline-flex; align-items:center; gap:8px;
+  transition: all .15s var(--ease);
+}
+.filter-pill .count{
+  font-size:11px; color: var(--text-muted); background: rgba(255,255,255,0.05);
+  padding: 1px 6px; border-radius:999px;
+}
+.filter-pill:hover{ color: var(--text-primary); border-color: var(--border-strong); background: rgba(255,255,255,0.05); }
+.filter-pill[aria-pressed="true"]{
+  color: var(--text-on-accent);
+  background: linear-gradient(135deg, var(--emerald), var(--cyan));
+  border-color: transparent;
+}
+.filter-pill[aria-pressed="true"] .count{ background: rgba(7,16,25,0.25); color: var(--text-on-accent); }
+
+.results-meta{
+  font-family: var(--font-mono); font-size:12.5px; color: var(--text-muted);
+  margin: -18px 0 28px;
+}
+
+.empty-state{
+  text-align:center; padding: 60px 24px; color: var(--text-muted);
+  font-family: var(--font-mono); font-size:14px;
+  border: 1px dashed var(--border-strong); border-radius: var(--r-lg);
+  display:none;
+}
+.empty-state.show{ display:block; }
+
+/* ============================================================
+   PROJECT CARDS
+   ============================================================ */
+.project-grid{
+  display:grid; grid-template-columns: repeat(3, 1fr); gap:20px;
+}
+@media (max-width: 980px){ .project-grid{ grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 680px){ .project-grid{ grid-template-columns: 1fr; } }
+
+.project-card{
+  padding: 24px; display:flex; flex-direction:column; gap:14px;
+  transition: transform .2s var(--ease), border-color .2s var(--ease);
+}
+.project-card:hover{ transform: translateY(-3px); border-color: var(--border-strong); }
+.project-card.hidden{ display:none; }
+.project-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+.project-domain{
+  font-family: var(--font-mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase;
+  padding: 4px 9px; border-radius:6px;
+  display:inline-flex; align-items:center; gap:6px;
+}
+.project-domain::before{ content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.dom-cybersec{ color:#e07a7a; background:rgba(224,122,122,0.1); }
+.dom-network{ color:#0ba3d9; background:rgba(11,163,217,0.1); }
+.dom-software{ color:#2fc794; background:rgba(47,199,148,0.1); }
+.dom-cloud{ color:#8b9cf7; background:rgba(139,156,247,0.1); }
+.dom-hardware{ color:#d9a441; background:rgba(217,164,65,0.1); }
+.dom-troubleshooting{ color:#c98bd9; background:rgba(201,139,217,0.1); }
+
+.project-title{ font-size:19px; }
+.project-tagline{ font-size:13.5px; color: var(--cyan-bright); font-family: var(--font-mono); }
+.project-desc{ font-size:14px; color: var(--text-secondary); flex-grow:1; }
+.project-meta{
+  font-size:12.5px; color: var(--text-muted); font-family: var(--font-mono);
+  padding-top:12px; border-top:1px solid var(--border);
+  display:flex; flex-direction:column; gap:3px;
+}
+.project-tech{ display:flex; flex-wrap:wrap; gap:6px; }
+.tech-pill{
+  font-family: var(--font-mono); font-size:11px; color: var(--text-secondary);
+  background: rgba(255,255,255,0.04); border:1px solid var(--border);
+  padding: 3px 8px; border-radius:5px;
+}
+.project-links{ display:flex; gap:10px; margin-top:4px; }
+.project-links a{
+  font-size:13px; font-weight:600; display:inline-flex; align-items:center; gap:6px;
+  color: var(--text-secondary);
+}
+.project-links a:hover{ color: var(--emerald-bright); }
+
+/* ============================================================
+   EVENTS
+   ============================================================ */
+.event-list{ display:flex; flex-direction:column; gap:18px; }
+.event-card{
+  display:grid; grid-template-columns: 130px 1fr; gap:0;
+  overflow:hidden;
+}
+.event-card.hidden{ display:none; }
+.event-date{
+  background: var(--bg-deep); border-right:1px solid var(--border);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding: 20px 12px; text-align:center; gap:2px;
+}
+.event-date .month{ font-family: var(--font-mono); font-size:12px; color: var(--cyan-bright); text-transform:uppercase; letter-spacing:.08em; }
+.event-date .day{ font-family: var(--font-display); font-size:32px; font-weight:700; }
+.event-date .dow{ font-size:11px; color: var(--text-muted); }
+.event-body{ padding: 22px 26px; }
+.event-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+.event-type{
+  font-family: var(--font-mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase;
+  padding: 4px 9px; border-radius:6px; color: var(--emerald-bright); background: rgba(37,167,123,0.1);
+}
+.event-title{ font-size:19px; margin-top:10px; }
+.event-meta-row{
+  display:flex; flex-wrap:wrap; gap:16px; margin-top:12px;
+  font-size:13px; color: var(--text-secondary);
+}
+.event-meta-row .meta-item{ display:flex; align-items:center; gap:7px; }
+.event-meta-row svg{ width:15px; height:15px; flex-shrink:0; color: var(--text-muted); }
+.event-speaker{
+  margin-top:14px; font-size:13.5px; color: var(--text-secondary);
+  padding: 12px 14px; border-radius: var(--r-sm); background: rgba(255,255,255,0.02); border:1px solid var(--border);
+}
+.event-speaker b{ color: var(--text-primary); }
+
+.rsvp-block{ margin-top:16px; max-width:340px; }
+.rsvp-row{ display:flex; justify-content:space-between; font-family: var(--font-mono); font-size:12px; color: var(--text-muted); margin-bottom:6px; }
+.rsvp-track{ height:6px; border-radius:999px; background: rgba(255,255,255,0.06); overflow:hidden; }
+.rsvp-fill{ height:100%; border-radius:999px; background: linear-gradient(90deg, var(--emerald), var(--cyan)); transition: width .6s var(--ease); }
+.rsvp-fill.almost-full{ background: linear-gradient(90deg, var(--amber), var(--danger)); }
+
+.event-details{ margin-top:16px; border-top:1px solid var(--border); padding-top:14px; }
+.event-details summary{
+  cursor:pointer; font-size:13.5px; font-weight:600; color: var(--cyan-bright);
+  list-style:none; display:flex; align-items:center; gap:8px;
+}
+.event-details summary::-webkit-details-marker{ display:none; }
+.event-details summary::before{ content:"+"; font-family: var(--font-mono); width:16px; }
+.event-details[open] summary::before{ content:"–"; }
+.event-details-body{ padding-top:14px; display:flex; flex-direction:column; gap:16px; }
+.agenda-list{ display:flex; flex-direction:column; gap:8px; }
+.agenda-list li{ display:flex; gap:12px; font-size:13.5px; color: var(--text-secondary); }
+.agenda-time{ font-family: var(--font-mono); font-size:12px; color: var(--text-muted); min-width:64px; flex-shrink:0; }
+.prereq-list{ display:flex; flex-direction:column; gap:6px; font-size:13.5px; color: var(--text-secondary); }
+.prereq-list li::before{ content:"▸ "; color: var(--emerald-bright); }
+.resource-links{ display:flex; flex-wrap:wrap; gap:8px; }
+
+.event-actions{ display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; }
+
+@media (max-width: 640px){
+  .event-card{ grid-template-columns: 1fr; }
+  .event-date{ flex-direction:row; gap:8px; padding:12px 20px; border-right:none; border-bottom:1px solid var(--border); justify-content:flex-start; }
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.toast{
+  position: fixed; bottom:24px; left:50%; transform: translate(-50%, 20px);
+  background: var(--card-bg-solid); border:1px solid var(--border-strong);
+  padding: 14px 20px; border-radius: var(--r-md);
+  font-size:14px; display:flex; align-items:center; gap:10px;
+  box-shadow: 0 20px 40px -16px rgba(0,0,0,0.5);
+  z-index: 200; opacity:0; pointer-events:none;
+  transition: opacity .25s var(--ease), transform .25s var(--ease);
+}
+.toast.show{ opacity:1; transform: translate(-50%, 0); pointer-events:auto; }
+.toast::before{ content:"✓"; color: var(--emerald-bright); font-weight:700; }
+
+/* ============================================================
+   MODAL (Join Club)
+   ============================================================ */
+.modal-overlay{
+  position: fixed; inset:0; background: rgba(6,11,16,0.72);
+  backdrop-filter: blur(3px);
+  display:flex; align-items:center; justify-content:center;
+  padding: 20px;
+  z-index: 300; opacity:0; pointer-events:none;
+  transition: opacity .2s var(--ease);
+}
+.modal-overlay.open{ opacity:1; pointer-events:auto; }
+.modal{
+  width: 100%; max-width: 520px; max-height: 88vh; overflow-y:auto;
+  background: var(--bg-elevated); border:1px solid var(--border-strong);
+  border-radius: var(--r-lg);
+  transform: translateY(12px) scale(.98);
+  transition: transform .25s var(--ease);
+  box-shadow: 0 40px 80px -20px rgba(0,0,0,0.6);
+}
+.modal-overlay.open .modal{ transform: none; }
+.modal-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 20px 24px; border-bottom:1px solid var(--border);
+  position:sticky; top:0; background: var(--bg-elevated); z-index:2;
+}
+.modal-head h3{ font-size:18px; }
+.modal-close{
+  width:32px; height:32px; border-radius:8px; border:1px solid var(--border-strong);
+  background:none; color: var(--text-secondary); display:flex; align-items:center; justify-content:center;
+  font-size:16px;
+}
+.modal-close:hover{ color: var(--text-primary); border-color: var(--border-strong); background: rgba(255,255,255,0.05); }
+.modal-body{ padding: 24px; }
+
+.step-indicator{ display:flex; align-items:center; gap:6px; margin-bottom:24px; }
+.step-dot{ height:4px; flex:1; border-radius:999px; background: var(--border); transition: background .2s var(--ease); }
+.step-dot.done{ background: var(--emerald); }
+.step-dot.active{ background: var(--cyan-bright); }
+
+.form-step{ display:none; flex-direction:column; gap:18px; }
+.form-step.active{ display:flex; }
+.form-group{ display:flex; flex-direction:column; gap:7px; }
+.form-group label{ font-size:13px; font-weight:600; color: var(--text-secondary); }
+.form-group .hint{ font-size:12px; color: var(--text-muted); font-weight:400; }
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group select,
+.form-group textarea{
+  background: rgba(255,255,255,0.03); border:1px solid var(--border-strong); border-radius: var(--r-sm);
+  padding: 11px 13px; color: var(--text-primary); font-family: var(--font-body); font-size:14.5px;
+  width:100%;
+}
+.form-group input::placeholder, .form-group textarea::placeholder{ color: var(--text-muted); }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus{
+  outline:none; border-color: var(--cyan-bright); box-shadow: 0 0 0 3px var(--cyan-glow);
+}
+.form-error{ font-size:12px; color: var(--danger); display:none; }
+.form-group.invalid input, .form-group.invalid select{ border-color: var(--danger); }
+.form-group.invalid .form-error{ display:block; }
+
+.radio-card, .check-card{
+  display:flex; align-items:flex-start; gap:12px;
+  padding: 13px 14px; border-radius: var(--r-sm); border:1px solid var(--border-strong);
+  cursor:pointer; transition: all .15s var(--ease);
+}
+.radio-card:hover, .check-card:hover{ border-color: var(--cyan-bright); background: rgba(4,127,169,0.06); }
+.radio-card input, .check-card input{ margin-top:3px; accent-color: var(--emerald); }
+.radio-card .label-title, .check-card .label-title{ font-size:14.5px; font-weight:600; }
+.radio-card .label-desc, .check-card .label-desc{ font-size:12.5px; color: var(--text-muted); margin-top:2px; }
+.option-group{ display:flex; flex-direction:column; gap:10px; }
+.check-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+@media (max-width:480px){ .check-grid{ grid-template-columns:1fr; } }
+
+.modal-foot{
+  display:flex; justify-content:space-between; gap:12px;
+  padding: 18px 24px 24px;
+}
+
+.success-panel{ display:none; flex-direction:column; align-items:center; text-align:center; gap:16px; padding: 12px 0 4px; }
+.success-panel.active{ display:flex; }
+.success-icon{
+  width:56px; height:56px; border-radius:50%;
+  background: linear-gradient(135deg, var(--emerald), var(--cyan));
+  display:flex; align-items:center; justify-content:center; font-size:26px; color:#08131a;
+}
+.success-panel h3{ font-size:21px; }
+.success-panel p{ color: var(--text-secondary); font-size:14.5px; max-width:360px; }
+.success-actions{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:6px; }
+.receipt{
+  width:100%; text-align:left; margin-top:10px; padding:14px 16px;
+  border:1px solid var(--border); border-radius: var(--r-sm); background: rgba(255,255,255,0.02);
+  font-family: var(--font-mono); font-size:12.5px; color: var(--text-secondary); line-height:1.9;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer{ border-top:1px solid var(--grid-2); background: var(--bg-deep); padding: 64px 0 0; }
+.footer-grid{
+  display:grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px;
+  padding-bottom: 48px;
+}
+.footer-brand{ display:flex; gap:12px; }
+.footer-brand p{ margin-top:14px; font-size:13.5px; color: var(--text-muted); max-width:280px; }
+.footer-col h4{
+  font-family: var(--font-mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+  color: var(--text-muted); margin-bottom:16px; font-weight:600;
+}
+.footer-col ul{ display:flex; flex-direction:column; gap:11px; }
+.footer-col a{ font-size:13.5px; color: var(--text-secondary); }
+.footer-col a:hover{ color: var(--emerald-bright); }
+.campus-item{ font-size:13px; color: var(--text-secondary); display:flex; flex-direction:column; }
+.campus-item .campus-addr{ color: var(--text-muted); font-size:12px; }
+.footer-bottom{
+  border-top:1px solid var(--grid-2); padding: 20px 0 28px;
+  display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  font-size:12.5px; color: var(--text-muted);
+}
+@media (max-width: 900px){
+  .footer-grid{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px){
+  .footer-grid{ grid-template-columns: 1fr; }
+}
+
+/* @CSS_MARKER */
+
+</style>
+</head>
+<body>
+
+<!-- shared SVG defs -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2fc794"/>
+      <stop offset="100%" stop-color="#0ba3d9"/>
+    </linearGradient>
+  </defs>
+  <symbol id="emblem-symbol" viewBox="0 0 100 100">
+    <!-- outer hex for placeholder logo -->
+    <polygon points="50,16 79.44,33 79.44,67 50,84 20.56,67 20.56,33" fill="#ffffff" stroke="url(#brandGrad)" stroke-width="2.6"/>
+    <!-- inner hex for placeholder logo -->
+    <polygon points="50,31.3 66.19,40.65 66.19,59.35 50,68.7 33.81,59.35 33.81,40.65" fill="none" stroke="#ffffff" stroke-opacity="0.45" stroke-width="1.2"/>
+    <!-- terminal glyph -->
+    <text x="50" y="57" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-weight="700" font-size="19" fill="url(#brandGrad)">logo here</text>
+  </symbol>
+</svg>
+
+<!-- ============================================================
+     TICKER
+     ============================================================ -->
+<div class="ticker" role="marquee" aria-label="Upcoming club announcements">
+  <div class="ticker-track" id="tickerTrack">
+    <span> <b>Sept 3</b> -- Intro to Linux &amp; the Terminal -- Lafayette Campus, Bldg 100 Rm 214</span>
+    <span> <b>Sept 17</b> -- Recruiter Night with CGI Lafayette Innovation Center -- Virtual</span>
+    <span> <b>Sept 24</b> -- Security+ Study Jam #1 -- Lafayette Campus Library</span>
+    <span> <b>Oct 10–11</b> -- SoLAcc Fall Hack Night -- Lafayette Campus</span>
+    <span> <b>Oct 22</b> -- Terminal &amp; Tacos Social -- Student Commons</span>
+    <span aria-hidden="true"> <b>Sept 3</b> -- Intro to Linux &amp; the Terminal -- Lafayette Campus, Bldg 100 Rm 214</span>
+    <span aria-hidden="true"> <b>Sept 17</b> -- Recruiter Night with CGI Lafayette Innovation Center -- Virtual</span>
+    <span aria-hidden="true"> <b>Sept 24</b> -- Security+ Study Jam #1 -- Lafayette Campus Library</span>
+    <span aria-hidden="true"> <b>Oct 10–11</b> -- SoLAcc Fall Hack Night -- Lafayette Campus</span>
+    <span aria-hidden="true"> <b>Oct 22</b> -- Terminal &amp; Tacos Social -- Student Commons</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+<header class="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-brand" aria-label="SoLAcc IT Club home">
+      <svg class="emblem" viewBox="0 0 100 100" aria-hidden="true"><use href="#emblem-symbol"/></svg>
+      <div class="brand-text">
+        <span class="brand-title">SoLAcc IT Club</span>
+        <span class="brand-sub">Information Technology &amp; App Software Dev.</span>
+      </div>
+      <span class="campus-badge">Lafayette Campus</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+      <a href="projects.html">Projects</a>
+      <a href="events.html">Events</a>
+      <a href="#members">Members</a>
+      <a href="#careers">Careers</a>
+    </nav>
+
+    <div class="nav-right">
+      <button class="btn btn-primary btn-sm js-open-join">Join Club</button>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer-scrim" id="drawerScrim"></div>
+<nav class="mobile-drawer" id="mobileDrawer" aria-label="Mobile">
+  <a href="projects.html" class="drawer-link">Projects</a>
+  <a href="events.html" class="drawer-link">Events</a>
+  <a href="#members" class="drawer-link">Members</a>
+  <a href="#careers" class="drawer-link">Careers</a>
+  <button class="btn btn-primary btn-block js-open-join">Join Club</button>
+</nav>
+
+<main id="top">
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <span class="eyebrow">Acadiana's student-run IT community</span>
+      <h1 class="hero-title">Ctrl +<br>Alt +<br><span class="accent">Succeed.</span></h1>
+      <p class="hero-sub">The SoLAcc Information Technology Club is where students get hands-on with real projects, tutor each other through certifications, and meet the companies hiring across Acadiana -- no matter what campus you call home.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary js-open-join">Join the Club</button>
+        <a href="projects.html" class="btn btn-secondary">View Projects</a>
+      </div>
+    </div>
+
+    <div class="terminal" aria-label="Live club status monitor">
+      <div class="terminal-head">
+        <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
+        <span class="terminal-path">serverlab@solacc-it:~$</span>
+      </div>
+      <div class="terminal-body" id="terminalBody"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-value">15+</div>
+        <div class="stat-label">ACTIVE IT MEMBERS</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">1</div>
+        <div class="stat-label">STUDENT REPOSITORIES</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">1</div>
+        <div class="stat-label">CERTIFICATION TRACKS</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">1</div>
+        <div class="stat-label">LOCAL PARTNERS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand-col">
+        <div class="footer-brand">
+          <svg class="emblem" viewBox="0 0 100 100" aria-hidden="true"><use href="#emblem-symbol"/></svg>
+          <div>
+            <div class="brand-title">SoLAcc IT Club</div>
+            <p>A student-run community for hands-on projects, peer tutoring, certifications, and connections across the Acadiana tech scene.</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Campus Reach</h4>
+        <ul>
+          <li class="campus-item">Lafayette Campus (home base)<span class="campus-addr">1101 Bertrand Dr., Lafayette, LA</span></li>
+          <li class="campus-item">Opelousas Campus<span class="campus-addr">332 East South St., Opelousas, LA</span></li>
+          <li class="campus-item">New Iberia Campus<span class="campus-addr">908 Ember Dr., New Iberia, LA</span></li>
+          <li class="campus-item">St. Martinville Campus<span class="campus-addr">6305 Main Highway, St. Martinville, LA</span></li>
+          <li><a href="https://www.solacc.edu/campuses" target="_blank" rel="noopener">+5 more SoLAcc campuses ↗</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="https://catalog.solacc.edu" target="_blank" rel="noopener">Degree &amp; program catalog ↗</a></li>
+          <li><a href="https://github.com/solacc-it-club" target="_blank" rel="noopener">GitHub organization ↗</a></li>
+          <li><a href="#">Club constitution &amp; bylaws</a></li>
+          <li><a href="#">Code of conduct</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#">Join our Discord</a></li>
+          <li><a href="mailto:itclub@solacc.edu">itclub@solacc.edu</a></li>
+          <li><a href="https://www.solacc.edu" target="_blank" rel="noopener">solacc.edu ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SoLAcc Information Technology Club -- a student-run registered organization. Not an official representative of South Louisiana Community College.</span>
+      <span class="pill">Built by IT Club officers, for IT Club members</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JOIN CLUB MODAL
+     ============================================================ -->
+<div class="modal-overlay" id="joinModal" role="dialog" aria-modal="true" aria-labelledby="joinModalTitle" aria-hidden="true">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="joinModalTitle">Join SoLAcc IT Club</h3>
+      <button class="modal-close" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="step-indicator">
+        <span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span>
+      </div>
+
+      <form id="joinForm" novalidate>
+        <div class="form-step">
+          <div class="form-group">
+            <label for="joinName">Full name</label>
+            <input type="text" id="joinName" placeholder="J. Doe" required>
+            <span class="form-error">Enter your full name.</span>
+          </div>
+          <div class="form-group">
+            <label for="joinEmail">SoLAcc email</label>
+            <input type="email" id="joinEmail" placeholder="student@my.solacc.edu" required>
+            <span class="form-error">Enter a valid email address.</span>
+          </div>
+          <div class="form-group">
+            <label for="joinDiscord">Discord username <span class="hint">optional</span></label>
+            <input type="text" id="joinDiscord" placeholder="@username or username#0000">
+          </div>
+        </div>
+
+        <div class="form-step">
+          <div class="form-group">
+            <label>Academic concentration</label>
+            <div class="option-group">
+              <label class="radio-card">
+                <input type="radio" name="concentration" value="Information Technology" required>
+                <span><span class="label-title">Information Technology</span><span class="label-desc">Networking, systems, and security-focused coursework</span></span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="concentration" value="Application Software Development" required>
+                <span><span class="label-title">Application Software Development</span><span class="label-desc">Programming and software engineering track</span></span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="concentration" value="General Studies / Non-IT Major" required>
+                <span><span class="label-title">General Studies / Non-IT Major</span><span class="label-desc">Curious about tech, not your primary program</span></span>
+              </label>
+            </div>
+            <span class="form-error">Choose a concentration.</span>
+          </div>
+        </div>
+
+        <div class="form-step">
+          <div class="form-group">
+            <label>Tech interests <span class="hint">select any that apply</span></label>
+            <div class="check-grid">
+              <label class="check-card"><input type="checkbox" name="interests" value="Cybersecurity"><span class="label-title">Cybersecurity</span></label>
+              <label class="check-card"><input type="checkbox" name="interests" value="Web Development"><span class="label-title">Web Development</span></label>
+              <label class="check-card"><input type="checkbox" name="interests" value="Linux/SysAdmin"><span class="label-title">Linux/SysAdmin</span></label>
+              <label class="check-card"><input type="checkbox" name="interests" value="Networking"><span class="label-title">Networking</span></label>
+              <label class="check-card"><input type="checkbox" name="interests" value="IoT/Hardware"><span class="label-title">IoT/Hardware</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-step">
+          <div class="form-group">
+            <label>Review &amp; confirm</label>
+            <p style="font-size:13.5px;color:var(--text-secondary)">Double check your info on the previous steps, then submit. An officer will follow up by email with your Discord invite and the next meeting time.</p>
+          </div>
+        </div>
+      </form>
+
+      <div class="success-panel">
+        <div class="success-icon">✓</div>
+        <h3>You're in the queue!</h3>
+        <p>Placeholder text replaced on submit.</p>
+        <div class="receipt"></div>
+        <div class="success-actions">
+          <a href="#" class="btn btn-primary btn-sm">Open Discord invite</a>
+          <button class="btn btn-secondary btn-sm" data-ics
+            data-title="SoLAcc IT Club -- Next General Meeting"
+            data-desc="Weekly SoLAcc IT Club general meeting. New members welcome!"
+            data-location="Lafayette Campus, Bldg 100 Rm 214"
+            data-start="2026-08-27T17:30:00"
+            data-end="2026-08-27T18:30:00">Add next meeting to calendar</button>
+          <button class="btn btn-ghost btn-sm js-done">Done</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn btn-secondary btn-back">Back</button>
+      <button type="button" class="btn btn-primary btn-next">Continue</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ==================================================================
+   SoLAcc IT Club -- shared behavior
+   Used by: index.html, projects.html, events.html (and future pages)
+   ================================================================== */
+
+/* ============================================================
+   ACTIVE NAV LINK
+   ============================================================ */
+(function(){
+  const path = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a, .mobile-drawer a.drawer-link').forEach(a => {
+    const href = a.getAttribute('href');
+    if(!href) return;
+    if(href === path || (path === '' && href === 'index.html')){
+      a.classList.add('active');
+    }
+  });
+})();
+
+/* ============================================================
+   MOBILE DRAWER
+   ============================================================ */
+(function(){
+  const toggle = document.getElementById('mobileToggle');
+  const drawer = document.getElementById('mobileDrawer');
+  const scrim = document.getElementById('drawerScrim');
+  if(!toggle || !drawer || !scrim) return;
+  function closeDrawer(){
+    drawer.classList.remove('open'); scrim.classList.remove('open');
+    toggle.setAttribute('aria-expanded','false');
+  }
+  function openDrawer(){
+    drawer.classList.add('open'); scrim.classList.add('open');
+    toggle.setAttribute('aria-expanded','true');
+  }
+  toggle.addEventListener('click', () => {
+    drawer.classList.contains('open') ? closeDrawer() : openDrawer();
+  });
+  scrim.addEventListener('click', closeDrawer);
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+})();
+
+/* ============================================================
+   TERMINAL LIVE STATUS FEED (homepage hero only -- no-ops elsewhere)
+   ============================================================ */
+(function(){
+  const body = document.getElementById('terminalBody');
+  if(!body) return;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const lines = [
+    {p:'$ uptime', o:'homelab-01 up 47 days, load avg 0.42 0.38 0.31'},
+    {p:'$ tail -f /var/log/club-activity.log', o:null},
+    {p:null, o:'[OK] campus-mesh-vpn heartbeat received -- 6 nodes online', cls:'ok'},
+    {p:null, o:'[OK] barcode-scanner v2.1 deployed by officer -- software/', cls:'ok'},
+    {p:null, o:'[MEETING] Weekly sync checked in: 15 members present', cls:'dim'},
+    {p:null, o:'[OK] pi-cluster-03 job queue cleared -- 0 pending', cls:'ok'},
+    {p:'$ git log --oneline -3 solacc-room-finder', o:null},
+    {p:null, o:'a3f9c1 fix: room availability race condition', cls:'dim'},
+    {p:null, o:'8b21e0 feat: add Opelousas campus building map', cls:'dim'},
+    {p:'$ status --club', o:null},
+    {p:null, o:'[OK] All systems nominal. See you at the next meeting!', cls:'ok'},
+  ];
+
+  function renderStatic(){
+    body.innerHTML = lines.map(l => {
+      const text = l.p ? l.p : l.o;
+      const cls = l.p ? 'prompt' : (l.cls || '');
+      return `<span class="term-line" style="opacity:1;animation:none;"><span class="${cls}">${text}</span></span>`;
+    }).join('') + '<span class="term-cursor"></span>';
+  }
+
+  if(reduced){ renderStatic(); return; }
+
+  let i = 0;
+  function typeNext(){
+    if(i >= lines.length){
+      const cursor = document.createElement('span');
+      cursor.className = 'term-cursor';
+      body.appendChild(cursor);
+      return;
+    }
+    const l = lines[i];
+    const el = document.createElement('span');
+    el.className = 'term-line';
+    const inner = document.createElement('span');
+    inner.className = l.p ? 'prompt' : (l.cls || '');
+    el.appendChild(inner);
+    body.appendChild(el);
+    const full = l.p ? l.p : l.o;
+    let c = 0;
+    const speed = l.p ? 28 : 10;
+    const typer = setInterval(() => {
+      inner.textContent = full.slice(0, c+1);
+      c++;
+      if(c >= full.length){
+        clearInterval(typer);
+        i++;
+        setTimeout(typeNext, l.p ? 120 : 260);
+      }
+    }, speed);
+  }
+  typeNext();
+})();
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+function showToast(message){
+  let toast = document.getElementById('siteToast');
+  if(!toast){
+    toast = document.createElement('div');
+    toast.id = 'siteToast';
+    toast.className = 'toast';
+    toast.setAttribute('role','status');
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => toast.classList.remove('show'), 3200);
+}
+
+/* ============================================================
+   GENERIC FILTER PILLS
+   Wires up a .filter-bar of .filter-pill buttons (data-filter="value")
+   against a set of cards (data-domain / data-category on each card).
+   ============================================================ */
+function initFilterBar(barId, cardSelector, dataAttr, emptyStateId){
+  const bar = document.getElementById(barId);
+  if(!bar) return;
+  const cards = Array.from(document.querySelectorAll(cardSelector));
+  const empty = emptyStateId ? document.getElementById(emptyStateId) : null;
+  const pills = Array.from(bar.querySelectorAll('.filter-pill'));
+
+  function apply(value){
+    let visible = 0;
+    cards.forEach(card => {
+      const match = value === 'all' || card.getAttribute(dataAttr) === value;
+      card.classList.toggle('hidden', !match);
+      if(match) visible++;
+    });
+    if(empty) empty.classList.toggle('show', visible === 0);
+  }
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.setAttribute('aria-pressed', 'false'));
+      pill.setAttribute('aria-pressed', 'true');
+      apply(pill.getAttribute('data-filter'));
+    });
+  });
+
+  const initial = bar.querySelector('.filter-pill[aria-pressed="true"]');
+  apply(initial ? initial.getAttribute('data-filter') : 'all');
+}
+
+/* ============================================================
+   ICS CALENDAR GENERATION
+   opts: { title, description, location, start: Date, end: Date }
+   ============================================================ */
+function downloadICS(opts){
+  function fmt(d){
+    return d.toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z';
+  }
+  const uid = 'solacc-it-' + Date.now() + '@solacc-it-club';
+  const lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//SoLAcc IT Club//Events//EN',
+    'CALSCALE:GREGORIAN',
+    'BEGIN:VEVENT',
+    'UID:' + uid,
+    'DTSTAMP:' + fmt(new Date()),
+    'DTSTART:' + fmt(opts.start),
+    'DTEND:' + fmt(opts.end),
+    'SUMMARY:' + (opts.title || 'SoLAcc IT Club Event').replace(/\n/g,' '),
+    'DESCRIPTION:' + (opts.description || '').replace(/\n/g,'\\n'),
+    'LOCATION:' + (opts.location || '').replace(/\n/g,' '),
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ];
+  const blob = new Blob([lines.join('\r\n')], {type:'text/calendar;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = (opts.title || 'event').toLowerCase().replace(/[^a-z0-9]+/g,'-') + '.ics';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  showToast('Calendar file downloaded');
+}
+
+/* wire up any [data-ics] buttons declaratively, e.g. on event cards */
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('[data-ics]');
+  if(!btn) return;
+  downloadICS({
+    title: btn.getAttribute('data-title'),
+    description: btn.getAttribute('data-desc') || '',
+    location: btn.getAttribute('data-location') || '',
+    start: new Date(btn.getAttribute('data-start')),
+    end: new Date(btn.getAttribute('data-end')),
+  });
+});
+
+/* ============================================================
+   JOIN CLUB MODAL
+   ============================================================ */
+(function(){
+  const overlay = document.getElementById('joinModal');
+  if(!overlay) return;
+  const openers = document.querySelectorAll('.js-open-join');
+  const closeBtn = overlay.querySelector('.modal-close');
+  const steps = Array.from(overlay.querySelectorAll('.form-step'));
+  const dots = Array.from(overlay.querySelectorAll('.step-dot'));
+  const successPanel = overlay.querySelector('.success-panel');
+  const modalBody = overlay.querySelector('.modal-body');
+  const form = document.getElementById('joinForm');
+  const modalFoot = overlay.querySelector('.modal-foot');
+  const backBtn = overlay.querySelector('.btn-back');
+  const nextBtn = overlay.querySelector('.btn-next');
+  let current = 0;
+  let lastFocused = null;
+
+  function renderStep(){
+    steps.forEach((s,i) => s.classList.toggle('active', i === current));
+    dots.forEach((d,i) => {
+      d.classList.toggle('active', i === current);
+      d.classList.toggle('done', i < current);
+    });
+    backBtn.style.visibility = current === 0 ? 'hidden' : 'visible';
+    nextBtn.textContent = current === steps.length - 1 ? 'Submit application' : 'Continue';
+  }
+
+  function openModal(){
+    lastFocused = document.activeElement;
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    current = 0;
+    form.reset();
+    form.style.display = '';
+    modalFoot.style.display = '';
+    successPanel.classList.remove('active');
+    clearErrors();
+    renderStep();
+    const firstField = steps[0].querySelector('input, select');
+    if(firstField) setTimeout(() => firstField.focus(), 60);
+  }
+
+  function closeModal(){
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+    if(lastFocused) lastFocused.focus();
+  }
+
+  function clearErrors(){
+    overlay.querySelectorAll('.form-group.invalid').forEach(g => g.classList.remove('invalid'));
+  }
+
+  function validateStep(){
+    clearErrors();
+    const activeStep = steps[current];
+    let valid = true;
+    activeStep.querySelectorAll('[required]').forEach(field => {
+      if(field.type === 'checkbox' || field.type === 'radio'){
+        const name = field.name;
+        const groupChecked = activeStep.querySelector(`input[name="${name}"]:checked`);
+        if(!groupChecked){
+          valid = false;
+          const group = field.closest('.form-group');
+          if(group) group.classList.add('invalid');
+        }
+      } else if(!field.value || (field.type === 'email' && !/^\S+@\S+\.\S+$/.test(field.value))){
+        valid = false;
+        const group = field.closest('.form-group');
+        if(group) group.classList.add('invalid');
+      }
+    });
+    return valid;
+  }
+
+  function buildReceipt(){
+    const name = form.querySelector('#joinName').value || 'Student';
+    const email = form.querySelector('#joinEmail').value || '';
+    const concentration = form.querySelector('input[name="concentration"]:checked');
+    const interests = Array.from(form.querySelectorAll('input[name="interests"]:checked')).map(i => i.value);
+    const receipt = overlay.querySelector('.receipt');
+    receipt.innerHTML = [
+      `applicant  : ${name}`,
+      `email      : ${email}`,
+      `track      : ${concentration ? concentration.value : 'n/a'}`,
+      `interests  : ${interests.length ? interests.join(', ') : 'none selected'}`,
+      `status     : PENDING OFFICER REVIEW`,
+    ].join('<br>');
+    overlay.querySelector('.success-panel h3 + p').textContent =
+      `Thanks, ${name.split(' ')[0] || 'there'} -- your application is in. An officer will confirm your spot and send a Discord invite to ${email || 'your inbox'} within a couple days.`;
+  }
+
+  nextBtn.addEventListener('click', () => {
+    if(!validateStep()) return;
+    if(current < steps.length - 1){
+      current++;
+      renderStep();
+    } else {
+      buildReceipt();
+      form.style.display = 'none';
+      modalFoot.style.display = 'none';
+      successPanel.classList.add('active');
+    }
+  });
+
+  backBtn.addEventListener('click', () => {
+    if(current > 0){ current--; renderStep(); }
+  });
+
+  openers.forEach(btn => btn.addEventListener('click', openModal));
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if(e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+  });
+  const doneBtn = overlay.querySelector('.js-done');
+  if(doneBtn) doneBtn.addEventListener('click', closeModal);
+})();
+
+// @SCRIPT_MARKER
+
+</script>
+</body>
+</html>
