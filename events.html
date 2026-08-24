@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ==================================================================
-   SoLAcc IT Club -- shared stylesheet
+   SoLAcc IT Club shared stylesheet
    Used by: index.html, projects.html, events.html (and future pages)
    ================================================================== */
 
@@ -217,15 +217,14 @@ img{ max-width:100%; display:block; }
   font-family: var(--font-mono); font-size: 11px; font-weight:600;
   letter-spacing: .08em;
   color: var(--text-on-accent);
-  background: var(--emerald-bright);
+  background: var(--emerald-bright); opacity: 0.7;
   padding: 3px 10px;
   margin-left: 16px;
   border-radius: 4px;
   flex-shrink:0;
   z-index:2;
   box-shadow: 0 0 12px var(--emerald-glow);
-}
-.ticker-track{
+}.ticker-track{
   display:flex; align-items:center; gap:56px;
   white-space:nowrap;
   padding-left: 32px;
@@ -733,21 +732,22 @@ img{ max-width:100%; display:block; }
   </symbol>
 </svg>
 
+
 <!-- ============================================================
-     TICKER
+     LIVE BAR TICKER
      ============================================================ -->
 <div class="ticker" role="marquee" aria-label="Upcoming club announcements">
   <div class="ticker-track" id="tickerTrack">
-    <span> <b>Sept 3</b> -- Intro to Linux &amp; the Terminal -- Lafayette Campus, Bldg 100 Rm 214</span>
-    <span> <b>Sept 17</b> -- Recruiter Night with CGI Lafayette Innovation Center -- Virtual</span>
-    <span> <b>Sept 24</b> -- Security+ Study Jam #1 -- Lafayette Campus Library</span>
-    <span> <b>Oct 10–11</b> -- SoLAcc Fall Hack Night -- Lafayette Campus</span>
-    <span> <b>Oct 22</b> -- Terminal &amp; Tacos Social -- Student Commons</span>
-    <span aria-hidden="true"> <b>Sept 3</b> -- Intro to Linux &amp; the Terminal -- Lafayette Campus, Bldg 100 Rm 214</span>
-    <span aria-hidden="true"> <b>Sept 17</b> -- Recruiter Night with CGI Lafayette Innovation Center -- Virtual</span>
-    <span aria-hidden="true"> <b>Sept 24</b> -- Security+ Study Jam #1 -- Lafayette Campus Library</span>
-    <span aria-hidden="true"> <b>Oct 10–11</b> -- SoLAcc Fall Hack Night -- Lafayette Campus</span>
-    <span aria-hidden="true"> <b>Oct 22</b> -- Terminal &amp; Tacos Social -- Student Commons</span>
+    <span> <b>Sept 3</b> -- PLACEHOLDER, Bldg 100 Rm 214</span>
+    <span> <b>Sept 17</b> -- PLACEHOLDER -- Virtual</span>
+    <span> <b>Sept 24</b> -- PLACEHOLDER -- Lafayette Campus Library</span>
+    <span> <b>Oct 10–11</b> -- PLACEHOLDER -- Lafayette Campus</span>
+    <span> <b>Oct 22</b> -- PLACEHOLDER -- Student Commons</span>
+    <span aria-hidden="true"> <b>Sept 3</b> -- PLACEHOLDER -- Lafayette Campus, Bldg 100 Rm 214</span>
+    <span aria-hidden="true"> <b>Sept 17</b> -- PLACEHOLDER -- Virtual</span>
+    <span aria-hidden="true"> <b>Sept 24</b> -- PLACEHOLDER-- Lafayette Campus Library</span>
+    <span aria-hidden="true"> <b>Oct 10–11</b> -- PLACEHOLDER -- Lafayette Campus</span>
+    <span aria-hidden="true"> <b>Oct 22</b> -- PLACEHOLDER -- Student Commons</span>
   </div>
 </div>
 
@@ -760,9 +760,8 @@ img{ max-width:100%; display:block; }
       <svg class="emblem" viewBox="0 0 100 100" aria-hidden="true"><use href="#emblem-symbol"/></svg>
       <div class="brand-text">
         <span class="brand-title">SoLAcc IT Club</span>
-        <span class="brand-sub">Information Technology &amp; App Software Dev.</span>
+        <span class="brand-sub">Information Technology and App Dev.</span>
       </div>
-      <span class="campus-badge">Lafayette Campus</span>
     </a>
 
     <nav class="nav-links" aria-label="Primary">
@@ -792,15 +791,25 @@ img{ max-width:100%; display:block; }
 
 <main id="top">
 
+<div class="drawer-scrim" id="drawerScrim"></div>
+<nav class="mobile-drawer" id="mobileDrawer" aria-label="Mobile">
+  <a href="projects.html" class="drawer-link">Projects</a>
+  <a href="events.html" class="drawer-link">Events</a>
+  <a href="#members" class="drawer-link">Members</a>
+  <a href="#careers" class="drawer-link">Careers</a>
+  <button class="btn btn-primary btn-block js-open-join">Join Club</button>
+</nav>
+
+<main id="top">
+
 <!-- ============================================================
      PAGE BANNER
      ============================================================ -->
 <section class="page-banner">
   <div class="container">
     <div class="breadcrumb"><a href="index.html">Home</a> / Events</div>
-    <span class="eyebrow">Workshops &amp; hands-on roadmap</span>
-    <h1 class="section-title">Show up, build something, take it further.</h1>
-    <p class="section-desc">Every event below has real seats, a real room (or a real Meet link), and something you'll walk away able to do. All times are Central. Tap a card open for the full agenda before you RSVP.</p>
+    <h1 class="section-title">Get involved!</h1>
+    <p class="section-desc">Events below are the Roadmap, the clubs future plans, and notable events both on campus and within the Lafayette area. Tap a card open for the full agenda before you RSVP.</p>
   </div>
 </section>
 
@@ -812,7 +821,7 @@ img{ max-width:100%; display:block; }
     <div class="filter-bar" id="eventFilterBar">
       <button class="filter-pill" data-filter="all" aria-pressed="true">All <span class="count">7</span></button>
       <button class="filter-pill" data-filter="workshop" aria-pressed="false">Workshops <span class="count">2</span></button>
-      <button class="filter-pill" data-filter="speaker" aria-pressed="false">Guest Speakers &amp; Recruiter Nights <span class="count">1</span></button>
+      <button class="filter-pill" data-filter="speaker" aria-pressed="false">Guest Speakers and Recruiter Nights <span class="count">1</span></button>
       <button class="filter-pill" data-filter="hackathon" aria-pressed="false">Hackathons <span class="count">1</span></button>
       <button class="filter-pill" data-filter="studyjam" aria-pressed="false">Certification Study Jams <span class="count">2</span></button>
       <button class="filter-pill" data-filter="social" aria-pressed="false">Tech Socials <span class="count">1</span></button>
@@ -827,41 +836,41 @@ img{ max-width:100%; display:block; }
           <div class="event-top">
             <div>
               <span class="event-type">Workshop</span>
-              <h3 class="event-title">Intro to Linux &amp; the Terminal</h3>
+              <h3 class="event-title">Placeholder Event</h3>
             </div>
           </div>
           <div class="event-meta-row">
             <span class="meta-item"><svg width="15" height="15"><use href="#icon-clock"/></svg>5:30 -- 7:00 PM CST</span>
             <span class="meta-item"><svg width="15" height="15"><use href="#icon-pin"/></svg>Lafayette Campus, Bldg 100 Rm 214</span>
           </div>
-          <div class="event-speaker"><b>Led by:</b> Club officers -- no prior Linux experience needed, this is the on-ramp.</div>
+          <div class="event-speaker"><b>Led by:</b> Club officers -- no prior Linux experience needed.</div>
           <div class="rsvp-block">
             <div class="rsvp-row"><span>22 / 30 seats reserved</span><span>8 left</span></div>
             <div class="rsvp-track"><div class="rsvp-fill" style="width:73%"></div></div>
           </div>
           <details class="event-details">
-            <summary>Full agenda, prereqs &amp; resources</summary>
+            <summary>More</summary>
             <div class="event-details-body">
               <ul class="agenda-list">
-                <li><span class="agenda-time">5:30 PM</span><span>Welcome &amp; a five-minute history of Linux</span></li>
-                <li><span class="agenda-time">5:45 PM</span><span>Filesystem &amp; navigation, live in the terminal</span></li>
+                <li><span class="agenda-time">5:30 PM</span><span>Welcome and a five-minute history of Linux</span></li>
+                <li><span class="agenda-time">5:45 PM</span><span>Filesystem and navigation, live in the terminal</span></li>
                 <li><span class="agenda-time">6:15 PM</span><span>Hands-on lab: write your first shell script</span></li>
-                <li><span class="agenda-time">6:45 PM</span><span>Q&amp;A + snacks</span></li>
+                <li><span class="agenda-time">6:45 PM</span><span>QandA + snacks</span></li>
               </ul>
               <ul class="prereq-list">
-                <li>Bring a laptop -- Windows, Mac, or Linux all fine</li>
+                <li>Bring a laptop. Windows, Mac, or Linux all fine</li>
                 <li>Install VirtualBox beforehand using the linked guide</li>
               </ul>
               <div class="resource-links">
-                <a href="#" class="pill">Terminal cheat sheet (PDF)</a>
-                <a href="https://github.com/solacc-it-club/linux-101-labs" target="_blank" rel="noopener" class="pill">Lab files ↗</a>
+                <a href="website.com" class="pill">Terminal cheat sheet (PDF)</a>
+                <a href="https://github.com/" target="_blank" rel="noopener" class="pill">Lab files ↗</a>
               </div>
             </div>
           </details>
           <div class="event-actions">
             <button class="btn btn-primary btn-sm">RSVP</button>
             <button class="btn btn-secondary btn-sm" data-ics
-              data-title="Intro to Linux &amp; the Terminal"
+              data-title="Intro to Linux and the Terminal"
               data-desc="SoLAcc IT Club workshop. Bring a laptop."
               data-location="Lafayette Campus, Bldg 100 Rm 214"
               data-start="2026-09-03T17:30:00" data-end="2026-09-03T19:00:00">Add to calendar</button>
@@ -883,27 +892,27 @@ img{ max-width:100%; display:block; }
             <span class="meta-item"><svg width="15" height="15"><use href="#icon-clock"/></svg>6:00 -- 7:30 PM CST</span>
             <span class="meta-item"><svg width="15" height="15"><use href="#icon-video"/></svg>Virtual -- Google Meet link on RSVP</span>
           </div>
-          <div class="event-speaker"><b>Speakers:</b> Recruiting &amp; engineering team, CGI Lafayette Innovation Center.</div>
+          <div class="event-speaker"><b>Speakers:</b> Recruiting and engineering team, CGI Lafayette Innovation Center.</div>
           <div class="rsvp-block">
             <div class="rsvp-row"><span>47 / 50 seats reserved</span><span>3 left</span></div>
             <div class="rsvp-track"><div class="rsvp-fill almost-full" style="width:94%"></div></div>
           </div>
           <details class="event-details">
-            <summary>Full agenda, prereqs &amp; resources</summary>
+            <summary>Full agenda, prereqs and resources</summary>
             <div class="event-details-body">
               <ul class="agenda-list">
-                <li><span class="agenda-time">6:00 PM</span><span>Company overview &amp; culture</span></li>
+                <li><span class="agenda-time">6:00 PM</span><span>Company overview and culture</span></li>
                 <li><span class="agenda-time">6:20 PM</span><span>New-grad developer panel</span></li>
-                <li><span class="agenda-time">6:50 PM</span><span>Resume &amp; interview Q&amp;A</span></li>
+                <li><span class="agenda-time">6:50 PM</span><span>Resume and interview QandA</span></li>
                 <li><span class="agenda-time">7:10 PM</span><span>Networking breakout rooms</span></li>
               </ul>
               <ul class="prereq-list">
-                <li>Upload your resume to the shared folder 24 hours before</li>
+                <li>Test</li>
                 <li>Camera on and business casual is appreciated, not required</li>
               </ul>
               <div class="resource-links">
-                <a href="#" class="pill">Resume template</a>
-                <a href="#" class="pill">CGI new-grad program overview</a>
+                <a href="website.com" class="pill">Resume template</a>
+                <a href="website.com" class="pill">CGI new-grad program overview</a>
               </div>
             </div>
           </details>
@@ -938,7 +947,7 @@ img{ max-width:100%; display:block; }
             <div class="rsvp-track"><div class="rsvp-fill" style="width:70%"></div></div>
           </div>
           <details class="event-details">
-            <summary>Full agenda, prereqs &amp; resources</summary>
+            <summary>Full agenda, prereqs and resources</summary>
             <div class="event-details-body">
               <ul class="agenda-list">
                 <li><span class="agenda-time">5:30 PM</span><span>Domain 1 review: General Security Concepts</span></li>
@@ -950,8 +959,8 @@ img{ max-width:100%; display:block; }
                 <li>Attempt the linked 20-question practice quiz beforehand</li>
               </ul>
               <div class="resource-links">
-                <a href="#" class="pill">Security+ objectives checklist</a>
-                <a href="#" class="pill">Practice quiz</a>
+                <a href="website.com" class="pill">Security+ objectives checklist</a>
+                <a href="website.com" class="pill">Practice quiz</a>
               </div>
             </div>
           </details>
@@ -987,14 +996,14 @@ img{ max-width:100%; display:block; }
             <div class="rsvp-track"><div class="rsvp-fill" style="width:65%"></div></div>
           </div>
           <details class="event-details">
-            <summary>Full agenda, prereqs &amp; resources</summary>
+            <summary>Full agenda, prereqs and resources</summary>
             <div class="event-details-body">
               <ul class="agenda-list">
-                <li><span class="agenda-time">Sat 9:00 AM</span><span>Kickoff &amp; team formation</span></li>
+                <li><span class="agenda-time">Sat 9:00 AM</span><span>Kickoff and team formation</span></li>
                 <li><span class="agenda-time">Sat 9:30 AM</span><span>Hacking begins</span></li>
                 <li><span class="agenda-time">Sat 6:00 PM</span><span>Dinner break</span></li>
                 <li><span class="agenda-time">Sun 9:00 AM</span><span>Final hacking hour</span></li>
-                <li><span class="agenda-time">Sun 10:30 AM</span><span>Demos &amp; judging</span></li>
+                <li><span class="agenda-time">Sun 10:30 AM</span><span>Demos and judging</span></li>
                 <li><span class="agenda-time">Sun 11:45 AM</span><span>Awards</span></li>
               </ul>
               <ul class="prereq-list">
@@ -1002,8 +1011,8 @@ img{ max-width:100%; display:block; }
                 <li>Bring your own laptop and charger</li>
               </ul>
               <div class="resource-links">
-                <a href="#" class="pill">Hackathon rules (PDF)</a>
-                <a href="#" class="pill">Idea board</a>
+                <a href="website.com" class="pill">Hackathon rules (PDF)</a>
+                <a href="website.com" class="pill">Idea board</a>
               </div>
             </div>
           </details>
@@ -1025,7 +1034,7 @@ img{ max-width:100%; display:block; }
           <div class="event-top">
             <div>
               <span class="event-type">Tech Social</span>
-              <h3 class="event-title">Terminal &amp; Tacos Social</h3>
+              <h3 class="event-title">Terminal and Tacos Social</h3>
             </div>
           </div>
           <div class="event-meta-row">
@@ -1038,10 +1047,10 @@ img{ max-width:100%; display:block; }
             <div class="rsvp-track"><div class="rsvp-fill" style="width:83%"></div></div>
           </div>
           <details class="event-details">
-            <summary>Full agenda, prereqs &amp; resources</summary>
+            <summary>Full agenda, prereqs and resources</summary>
             <div class="event-details-body">
               <ul class="agenda-list">
-                <li><span class="agenda-time">6:00 PM</span><span>Tacos &amp; mingling</span></li>
+                <li><span class="agenda-time">6:00 PM</span><span>Tacos and mingling</span></li>
                 <li><span class="agenda-time">6:45 PM</span><span>Lightning talks -- show off a project in 3 minutes</span></li>
                 <li><span class="agenda-time">7:15 PM</span><span>Retro game tournament</span></li>
               </ul>
@@ -1049,14 +1058,14 @@ img{ max-width:100%; display:block; }
                 <li>None -- just RSVP so we order enough tacos</li>
               </ul>
               <div class="resource-links">
-                <a href="#" class="pill">Lightning talk sign-up</a>
+                <a href="website.com" class="pill">Lightning talk sign-up</a>
               </div>
             </div>
           </details>
           <div class="event-actions">
             <button class="btn btn-primary btn-sm">RSVP</button>
             <button class="btn btn-secondary btn-sm" data-ics
-              data-title="Terminal &amp; Tacos Social"
+              data-title="Terminal and Tacos Social"
               data-desc="Casual SoLAcc IT Club social. Food, games, lightning talks."
               data-location="Student Commons, Lafayette Campus"
               data-start="2026-10-22T18:00:00" data-end="2026-10-22T20:00:00">Add to calendar</button>
@@ -1084,7 +1093,7 @@ img{ max-width:100%; display:block; }
             <div class="rsvp-track"><div class="rsvp-fill" style="width:72%"></div></div>
           </div>
           <details class="event-details">
-            <summary>Full agenda, prereqs &amp; resources</summary>
+            <summary>Full agenda, prereqs and resources</summary>
             <div class="event-details-body">
               <ul class="agenda-list">
                 <li><span class="agenda-time">5:30 PM</span><span>Why homelab? Real use cases</span></li>
@@ -1097,8 +1106,8 @@ img{ max-width:100%; display:block; }
                 <li>USB drive (8GB or larger) for the installer</li>
               </ul>
               <div class="resource-links">
-                <a href="#" class="pill">Recommended hardware list</a>
-                <a href="#" class="pill">Proxmox install guide</a>
+                <a href="website.com" class="pill">Recommended hardware list</a>
+                <a href="website.com" class="pill">Proxmox install guide</a>
               </div>
             </div>
           </details>
@@ -1133,7 +1142,7 @@ img{ max-width:100%; display:block; }
             <div class="rsvp-track"><div class="rsvp-fill" style="width:55%"></div></div>
           </div>
           <details class="event-details">
-            <summary>Full agenda, prereqs &amp; resources</summary>
+            <summary>Full agenda, prereqs and resources</summary>
             <div class="event-details-body">
               <ul class="agenda-list">
                 <li><span class="agenda-time">5:30 PM</span><span>OSI model speed-review</span></li>
@@ -1145,8 +1154,8 @@ img{ max-width:100%; display:block; }
                 <li>Attempt the linked practice quiz beforehand</li>
               </ul>
               <div class="resource-links">
-                <a href="#" class="pill">Network+ objectives checklist</a>
-                <a href="#" class="pill">Practice quiz</a>
+                <a href="website.com" class="pill">Network+ objectives checklist</a>
+                <a href="website.com" class="pill">Practice quiz</a>
               </div>
             </div>
           </details>
@@ -1170,17 +1179,18 @@ img{ max-width:100%; display:block; }
 </main>
 
 <!-- ============================================================
-     FOOTER
+     FOOTER (CSS)
      ============================================================ -->
+
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand-col">
         <div class="footer-brand">
-          <svg class="emblem" viewBox="0 0 100 100" aria-hidden="true"><use href="#emblem-symbol"/></svg>
+          <svg class="emblem" viewBox="0 0 100 100" aria-hidden="true"><use href="website.com"emblem-symbol"/></svg>
           <div>
             <div class="brand-title">SoLAcc IT Club</div>
-            <p>A student-run community for hands-on projects, peer tutoring, certifications, and connections across the Acadiana tech scene.</p>
+            <p>A student-run community for hands-on projects, peer tutoring, certifications, and connections across the Lafayette area.</p>
           </div>
         </div>
       </div>
@@ -1191,42 +1201,42 @@ img{ max-width:100%; display:block; }
           <li class="campus-item">Opelousas Campus<span class="campus-addr">332 East South St., Opelousas, LA</span></li>
           <li class="campus-item">New Iberia Campus<span class="campus-addr">908 Ember Dr., New Iberia, LA</span></li>
           <li class="campus-item">St. Martinville Campus<span class="campus-addr">6305 Main Highway, St. Martinville, LA</span></li>
-          <li><a href="https://www.solacc.edu/campuses" target="_blank" rel="noopener">+5 more SoLAcc campuses ↗</a></li>
+          <li><a href="https://www.solacc.edu/campuses" target="_blank" rel="noopener">+5 more SoLAcc campuses ^</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Resources</h4>
         <ul>
-          <li><a href="https://catalog.solacc.edu" target="_blank" rel="noopener">Degree &amp; program catalog ↗</a></li>
-          <li><a href="https://github.com/solacc-it-club" target="_blank" rel="noopener">GitHub organization ↗</a></li>
-          <li><a href="#">Club constitution &amp; bylaws</a></li>
-          <li><a href="#">Code of conduct</a></li>
+          <li><a href="https://catalog.solacc.edu" target="_blank" rel="noopener">Degree &amp; program catalog ^</a></li>
+          <li><a href="https://github.com/Moxifica/club-website" target="_blank" rel="noopener">GitHub organization ^</a></li>
+          <li><a href="website.com"">Club constitution &amp; bylaws</a></li>
+          <li><a href="website.com"">Code of conduct</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Connect</h4>
         <ul>
-          <li><a href="#">Join our Discord</a></li>
-          <li><a href="mailto:itclub@solacc.edu">itclub@solacc.edu</a></li>
-          <li><a href="https://www.solacc.edu" target="_blank" rel="noopener">solacc.edu ↗</a></li>
+          <li><a href="https://discord.gg/Z5aqP9AeqD" target="_blank" rel="noopener">Join our Discord ^</a></li>
+          <li><a href="mailto:itclub@solacc.edu">Email Us</a></li>
+          <li><a href="https://www.solacc.edu" target="_blank" rel="noopener">School Website ^</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 SoLAcc Information Technology Club -- a student-run registered organization. Not an official representative of South Louisiana Community College.</span>
-      <span class="pill">Built by IT Club officers, for IT Club members</span>
+      <span>© 2026 SoLAcc Information Technology Club: a student-run registered organization. Not an official representative of South Louisiana Community College.</span>
+      <span class ="pill":> Hosted by Cloudfare. Website paid for and developed by Shae Bergeron.</span>
     </div>
   </div>
 </footer>
 
 <!-- ============================================================
-     JOIN CLUB MODAL
+     JOIN CLUB MODAL (CSS)
      ============================================================ -->
 <div class="modal-overlay" id="joinModal" role="dialog" aria-modal="true" aria-labelledby="joinModalTitle" aria-hidden="true">
   <div class="modal">
     <div class="modal-head">
-      <h3 id="joinModalTitle">Join SoLAcc IT Club</h3>
-      <button class="modal-close" aria-label="Close">✕</button>
+      <h3 id="joinModalTitle">Join the IT Club!</h3>
+      <button class="modal-close" aria-label="Close">X</button>
     </div>
     <div class="modal-body">
       <div class="step-indicator">
@@ -1236,13 +1246,13 @@ img{ max-width:100%; display:block; }
       <form id="joinForm" novalidate>
         <div class="form-step">
           <div class="form-group">
-            <label for="joinName">Full name</label>
-            <input type="text" id="joinName" placeholder="J. Doe" required>
+            <label for="joinName">Full Name</label>
+            <input type="text" id="joinName" placeholder="J. Person Doe" required>
             <span class="form-error">Enter your full name.</span>
           </div>
           <div class="form-group">
             <label for="joinEmail">SoLAcc email</label>
-            <input type="email" id="joinEmail" placeholder="student@my.solacc.edu" required>
+            <input type="email" id="joinEmail" placeholder="firstlast@my.solacc.edu" required>
             <span class="form-error">Enter a valid email address.</span>
           </div>
           <div class="form-group">
@@ -1257,15 +1267,15 @@ img{ max-width:100%; display:block; }
             <div class="option-group">
               <label class="radio-card">
                 <input type="radio" name="concentration" value="Information Technology" required>
-                <span><span class="label-title">Information Technology</span><span class="label-desc">Networking, systems, and security-focused coursework</span></span>
+                <span><span class="label-title">Information Technology</span></span>
               </label>
               <label class="radio-card">
                 <input type="radio" name="concentration" value="Application Software Development" required>
-                <span><span class="label-title">Application Software Development</span><span class="label-desc">Programming and software engineering track</span></span>
+                <span><span class="label-title">Application Software Development</span></span>
               </label>
               <label class="radio-card">
                 <input type="radio" name="concentration" value="General Studies / Non-IT Major" required>
-                <span><span class="label-title">General Studies / Non-IT Major</span><span class="label-desc">Curious about tech, not your primary program</span></span>
+                <span><span class="label-title">General Studies / Non-IT Major</span></span>
               </label>
             </div>
             <span class="form-error">Choose a concentration.</span>
@@ -1281,7 +1291,7 @@ img{ max-width:100%; display:block; }
               <label class="check-card"><input type="checkbox" name="interests" value="Linux/SysAdmin"><span class="label-title">Linux/SysAdmin</span></label>
               <label class="check-card"><input type="checkbox" name="interests" value="Networking"><span class="label-title">Networking</span></label>
               <label class="check-card"><input type="checkbox" name="interests" value="IoT/Hardware"><span class="label-title">IoT/Hardware</span></label>
-            </div>
+              <label class="check-card"><input type="checkbox" name="interests" value="Other"><span class="label-title">Other</span>
           </div>
         </div>
 
@@ -1299,11 +1309,11 @@ img{ max-width:100%; display:block; }
         <p>Placeholder text replaced on submit.</p>
         <div class="receipt"></div>
         <div class="success-actions">
-          <a href="#" class="btn btn-primary btn-sm">Open Discord invite</a>
+          <a href="website.com"" class="btn btn-primary btn-sm">Open Discord invite</a>
           <button class="btn btn-secondary btn-sm" data-ics
             data-title="SoLAcc IT Club -- Next General Meeting"
-            data-desc="Weekly SoLAcc IT Club general meeting. New members welcome!"
-            data-location="Lafayette Campus, Bldg 100 Rm 214"
+            data-desc="Weekly IT Club general meeting. New members welcome!"
+            data-location="Lafayette Campus,  Rm 601G Ardoin"
             data-start="2026-08-27T17:30:00"
             data-end="2026-08-27T18:30:00">Add next meeting to calendar</button>
           <button class="btn btn-ghost btn-sm js-done">Done</button>
@@ -1319,12 +1329,12 @@ img{ max-width:100%; display:block; }
 
 <script>
 /* ==================================================================
-   SoLAcc IT Club -- shared behavior
-   Used by: index.html, projects.html, events.html (and future pages)
+   SoLAcc IT Club shared behavior
+   Used by all main pages
    ================================================================== */
 
 /* ============================================================
-   ACTIVE NAV LINK
+   ACTIVE NAV LINK (Shared)
    ============================================================ */
 (function(){
   const path = location.pathname.split('/').pop() || 'index.html';
@@ -1338,7 +1348,7 @@ img{ max-width:100%; display:block; }
 })();
 
 /* ============================================================
-   MOBILE DRAWER
+   MOBILE DRAWER (Shared)
    ============================================================ */
 (function(){
   const toggle = document.getElementById('mobileToggle');
@@ -1361,69 +1371,7 @@ img{ max-width:100%; display:block; }
 })();
 
 /* ============================================================
-   TERMINAL LIVE STATUS FEED (homepage hero only -- no-ops elsewhere)
-   ============================================================ */
-(function(){
-  const body = document.getElementById('terminalBody');
-  if(!body) return;
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const lines = [
-    {p:'$ uptime', o:'homelab-01 up 47 days, load avg 0.42 0.38 0.31'},
-    {p:'$ tail -f /var/log/club-activity.log', o:null},
-    {p:null, o:'[OK] campus-mesh-vpn heartbeat received -- 6 nodes online', cls:'ok'},
-    {p:null, o:'[OK] barcode-scanner v2.1 deployed by officer -- software/', cls:'ok'},
-    {p:null, o:'[MEETING] Weekly sync checked in: 15 members present', cls:'dim'},
-    {p:null, o:'[OK] pi-cluster-03 job queue cleared -- 0 pending', cls:'ok'},
-    {p:'$ git log --oneline -3 solacc-room-finder', o:null},
-    {p:null, o:'a3f9c1 fix: room availability race condition', cls:'dim'},
-    {p:null, o:'8b21e0 feat: add Opelousas campus building map', cls:'dim'},
-    {p:'$ status --club', o:null},
-    {p:null, o:'[OK] All systems nominal. See you at the next meeting!', cls:'ok'},
-  ];
-
-  function renderStatic(){
-    body.innerHTML = lines.map(l => {
-      const text = l.p ? l.p : l.o;
-      const cls = l.p ? 'prompt' : (l.cls || '');
-      return `<span class="term-line" style="opacity:1;animation:none;"><span class="${cls}">${text}</span></span>`;
-    }).join('') + '<span class="term-cursor"></span>';
-  }
-
-  if(reduced){ renderStatic(); return; }
-
-  let i = 0;
-  function typeNext(){
-    if(i >= lines.length){
-      const cursor = document.createElement('span');
-      cursor.className = 'term-cursor';
-      body.appendChild(cursor);
-      return;
-    }
-    const l = lines[i];
-    const el = document.createElement('span');
-    el.className = 'term-line';
-    const inner = document.createElement('span');
-    inner.className = l.p ? 'prompt' : (l.cls || '');
-    el.appendChild(inner);
-    body.appendChild(el);
-    const full = l.p ? l.p : l.o;
-    let c = 0;
-    const speed = l.p ? 28 : 10;
-    const typer = setInterval(() => {
-      inner.textContent = full.slice(0, c+1);
-      c++;
-      if(c >= full.length){
-        clearInterval(typer);
-        i++;
-        setTimeout(typeNext, l.p ? 120 : 260);
-      }
-    }, speed);
-  }
-  typeNext();
-})();
-
-/* ============================================================
-   TOAST
+   TOAST (Shared)
    ============================================================ */
 function showToast(message){
   let toast = document.getElementById('siteToast');
@@ -1441,9 +1389,9 @@ function showToast(message){
 }
 
 /* ============================================================
-   GENERIC FILTER PILLS
-   Wires up a .filter-bar of .filter-pill buttons (data-filter="value")
-   against a set of cards (data-domain / data-category on each card).
+   GENERIC FILTER PILLS (Shared)
+      Wires up .filter-bar of .filter-pill buttons (data-filter="value")
+      against cards (data-domain / data-category for card)
    ============================================================ */
 function initFilterBar(barId, cardSelector, dataAttr, emptyStateId){
   const bar = document.getElementById(barId);
@@ -1475,8 +1423,8 @@ function initFilterBar(barId, cardSelector, dataAttr, emptyStateId){
 }
 
 /* ============================================================
-   ICS CALENDAR GENERATION
-   opts: { title, description, location, start: Date, end: Date }
+   ICS CALENDAR (Shared)
+      opts: { title, description, location, start: Date, end: Date }
    ============================================================ */
 function downloadICS(opts){
   function fmt(d){
@@ -1525,7 +1473,7 @@ document.addEventListener('click', (e) => {
 });
 
 /* ============================================================
-   JOIN CLUB MODAL
+   JOIN CLUB MODAL (Shared)
    ============================================================ */
 (function(){
   const overlay = document.getElementById('joinModal');
@@ -1616,7 +1564,7 @@ document.addEventListener('click', (e) => {
       `status     : PENDING OFFICER REVIEW`,
     ].join('<br>');
     overlay.querySelector('.success-panel h3 + p').textContent =
-      `Thanks, ${name.split(' ')[0] || 'there'} -- your application is in. An officer will confirm your spot and send a Discord invite to ${email || 'your inbox'} within a couple days.`;
+      `Thanks, ${name.split(' ')[0] || 'there'}! Your application is in. An officer will confirm your spot and send a Discord invite to ${email || 'your inbox'} within a few hours.`;
   }
 
   nextBtn.addEventListener('click', () => {
@@ -1650,7 +1598,7 @@ document.addEventListener('click', (e) => {
 
 </script>
 <script>
-  initFilterBar('eventFilterBar', '#eventList .event-card', 'data-category', 'eventEmptyState');
+  initFilterBar('projectFilterBar', '#projectGrid .project-card', 'data-domain', 'projectEmptyState');
 </script>
 </body>
 </html>
