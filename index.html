@@ -124,7 +124,6 @@ img{ max-width:100%; display:block; }
   gap: 8px;
 }
 .eyebrow::before{
-  content:"";
   width: 6px; height: 6px;
   background: var(--emerald-bright);
   border-radius: 50%;
@@ -218,7 +217,7 @@ img{ max-width:100%; display:block; }
   font-family: var(--font-mono); font-size: 11px; font-weight:600;
   letter-spacing: .08em;
   color: var(--text-on-accent);
-  background: var(--emerald-bright);
+  background: var(--emerald-bright); opacity: 0.7;
   padding: 3px 10px;
   margin-left: 16px;
   border-radius: 4px;
@@ -730,16 +729,16 @@ img{ max-width:100%; display:block; }
      ============================================================ -->
 <div class="ticker" role="marquee" aria-label="Upcoming club announcements">
   <div class="ticker-track" id="tickerTrack">
-    <span> <b>Sept 3</b> -- Intro to Linux &amp; the Terminal -- Lafayette Campus, Bldg 100 Rm 214</span>
-    <span> <b>Sept 17</b> -- Recruiter Night with CGI Lafayette Innovation Center -- Virtual</span>
-    <span> <b>Sept 24</b> -- Security+ Study Jam #1 -- Lafayette Campus Library</span>
-    <span> <b>Oct 10–11</b> -- SoLAcc Fall Hack Night -- Lafayette Campus</span>
-    <span> <b>Oct 22</b> -- Terminal &amp; Tacos Social -- Student Commons</span>
-    <span aria-hidden="true"> <b>Sept 3</b> -- Intro to Linux &amp; the Terminal -- Lafayette Campus, Bldg 100 Rm 214</span>
-    <span aria-hidden="true"> <b>Sept 17</b> -- Recruiter Night with CGI Lafayette Innovation Center -- Virtual</span>
-    <span aria-hidden="true"> <b>Sept 24</b> -- Security+ Study Jam #1 -- Lafayette Campus Library</span>
-    <span aria-hidden="true"> <b>Oct 10–11</b> -- SoLAcc Fall Hack Night -- Lafayette Campus</span>
-    <span aria-hidden="true"> <b>Oct 22</b> -- Terminal &amp; Tacos Social -- Student Commons</span>
+    <span> <b>Sept 3</b> -- PLACEHOLDER, Bldg 100 Rm 214</span>
+    <span> <b>Sept 17</b> -- PLACEHOLDER -- Virtual</span>
+    <span> <b>Sept 24</b> -- PLACEHOLDER -- Lafayette Campus Library</span>
+    <span> <b>Oct 10–11</b> -- PLACEHOLDER -- Lafayette Campus</span>
+    <span> <b>Oct 22</b> -- PLACEHOLDER -- Student Commons</span>
+    <span aria-hidden="true"> <b>Sept 3</b> -- PLACEHOLDER -- Lafayette Campus, Bldg 100 Rm 214</span>
+    <span aria-hidden="true"> <b>Sept 17</b> -- PLACEHOLDER -- Virtual</span>
+    <span aria-hidden="true"> <b>Sept 24</b> -- PLACEHOLDER-- Lafayette Campus Library</span>
+    <span aria-hidden="true"> <b>Oct 10–11</b> -- PLACEHOLDER -- Lafayette Campus</span>
+    <span aria-hidden="true"> <b>Oct 22</b> -- PLACEHOLDER -- Student Commons</span>
   </div>
 </div>
 
@@ -752,9 +751,8 @@ img{ max-width:100%; display:block; }
       <svg class="emblem" viewBox="0 0 100 100" aria-hidden="true"><use href="#emblem-symbol"/></svg>
       <div class="brand-text">
         <span class="brand-title">SoLAcc IT Club</span>
-        <span class="brand-sub">Information Technology &amp; App Software Dev.</span>
+        <span class="brand-sub">Information Technology &amp; App Dev.</span>
       </div>
-      <span class="campus-badge">Lafayette Campus</span>
     </a>
 
     <nav class="nav-links" aria-label="Primary">
@@ -790,9 +788,9 @@ img{ max-width:100%; display:block; }
 <section class="hero">
   <div class="container hero-grid">
     <div class="hero-content">
-      <span class="eyebrow">Acadiana's student-run IT community</span>
-      <h1 class="hero-title">Ctrl +<br>Alt +<br><span class="accent">Succeed.</span></h1>
-      <p class="hero-sub">The SoLAcc Information Technology Club is where students get hands-on with real projects, tutor each other through certifications, and meet the companies hiring across Acadiana -- no matter what campus you call home.</p>
+      <span class="eyebrow">SoLAcc's student-run IT community</span>
+      <h1 class="hero-title">Ctrl + Alt <br><span class="accent">Succeed.</span></h1>
+      <p class="hero-sub">The SoLAcc Information Technology Club is where students get hands-on with real projects, tutor each other through certifications, and meet the companies hiring across Acadiana. Sponsored by Professor Mike Charif, and found at room 601G or adjacent Lab, located at the Ardoin Building on the Lafayette Campus. Come check us out!</p>
       <div class="hero-actions">
         <button class="btn btn-primary js-open-join">Join the Club</button>
         <a href="projects.html" class="btn btn-secondary">View Projects</a>
@@ -802,30 +800,33 @@ img{ max-width:100%; display:block; }
     <div class="terminal" aria-label="Live club status monitor">
       <div class="terminal-head">
         <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
-        <span class="terminal-path">serverlab@solacc-it:~$</span>
+        <span class="terminal-path">serverlab@club-server:~$</span>
       </div>
       <div class="terminal-body" id="terminalBody"></div>
     </div>
   </div>
 
+  <!-- 
+      Find out what to put for the cards! Members, Projects, Events, Partners?
+  -->
+
   <div class="container">
     <div class="stats-bar">
       <div class="stat-card">
-        <div class="stat-value">15+</div>
-        <div class="stat-label">ACTIVE IT MEMBERS</div>
+        <div class="stat-value">15</div>
+        <div class="stat-label">ACTIVE MEMBERS</div>
       </div>
       <div class="stat-card">
         <div class="stat-value">1</div>
-        <div class="stat-label">STUDENT REPOSITORIES</div>
+        <div class="stat-label">STUDENT PROJECTS</div>
       </div>
       <div class="stat-card">
         <div class="stat-value">1</div>
-        <div class="stat-label">CERTIFICATION TRACKS</div>
+        <div class="stat-label">EVENTS</div>
       </div>
       <div class="stat-card">
         <div class="stat-value">1</div>
-        <div class="stat-label">LOCAL PARTNERS</div>
-      </div>
+        <div class="stat-label">PARTNERS</div>
     </div>
   </div>
 </section>
@@ -843,7 +844,7 @@ img{ max-width:100%; display:block; }
           <svg class="emblem" viewBox="0 0 100 100" aria-hidden="true"><use href="#emblem-symbol"/></svg>
           <div>
             <div class="brand-title">SoLAcc IT Club</div>
-            <p>A student-run community for hands-on projects, peer tutoring, certifications, and connections across the Acadiana tech scene.</p>
+            <p>A student-run community for hands-on projects, peer tutoring, certifications, and connections across the Lafayette area.</p>
           </div>
         </div>
       </div>
@@ -876,8 +877,8 @@ img{ max-width:100%; display:block; }
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 SoLAcc Information Technology Club -- a student-run registered organization. Not an official representative of South Louisiana Community College.</span>
-      <span class="pill">Built by IT Club officers, for IT Club members</span>
+      <span>© 2026 SoLAcc Information Technology Club: a student-run registered organization. Not an official representative of South Louisiana Community College.</span>
+      <span class ="pill":> Hosted by Cloudfare. Website paid for and developed by Shae Bergeron.</span>
     </div>
   </div>
 </footer>
@@ -1024,22 +1025,24 @@ img{ max-width:100%; display:block; }
 })();
 
 /* ============================================================
-   TERMINAL LIVE STATUS FEED (homepage hero only -- no-ops elsewhere)
+   TERMINAL SIM (homepage hero only, no-ops elsewhere. Stop forgetting to add the damn comma!)
    ============================================================ */
 (function(){
   const body = document.getElementById('terminalBody');
   if(!body) return;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const lines = [
-    {p:'$ uptime', o:'homelab-01 up 47 days, load avg 0.42 0.38 0.31'},
+    {p:'$ uptime'},
+    {p:null, o: '32 days, 4 users, load avg 0.42 0.38 0.31', cls:'dim',},
     {p:'$ tail -f /var/log/club-activity.log', o:null},
     {p:null, o:'[OK] campus-mesh-vpn heartbeat received -- 6 nodes online', cls:'ok'},
     {p:null, o:'[OK] barcode-scanner v2.1 deployed by officer -- software/', cls:'ok'},
     {p:null, o:'[MEETING] Weekly sync checked in: 15 members present', cls:'dim'},
     {p:null, o:'[OK] pi-cluster-03 job queue cleared -- 0 pending', cls:'ok'},
     {p:'$ git log --oneline -3 solacc-room-finder', o:null},
-    {p:null, o:'a3f9c1 fix: room availability race condition', cls:'dim'},
-    {p:null, o:'8b21e0 feat: add Opelousas campus building map', cls:'dim'},
+    {p:null, o:'fix: room availability race condition', cls:'dim'},
+    {p:null, o:'feat: add Opelousas campus building map', cls:'dim'},
+    {p:null, o:'edit: sudo rm -rf ./ # dont forget the .', cls:'dim'},
     {p:'$ status --club', o:null},
     {p:null, o:'[OK] All systems nominal. See you at the next meeting!', cls:'ok'},
   ];
