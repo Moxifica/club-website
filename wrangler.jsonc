@@ -1,12 +1,12 @@
 {
+  // wrangler.jsonc 
+  // for cloudfare worker wrangler
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "solacc-it-club",
+  "name": "solacc-club-website",
   // Bump this if you ever add newer Workers runtime features; otherwise leave as-is
   "compatibility_date": "2026-08-24",
 
-  // This is a plain static site (no server-side Worker code), so we just point
-  // Wrangler at the folder of files to serve. "./" = repo root, since
-  // index.html / projects.html / events.html / css / js all live there.
+  // This is a plain static site (no server-side Worker code), so keep wrangler to root dir
   "assets": {
     "directory": "./"
   }
